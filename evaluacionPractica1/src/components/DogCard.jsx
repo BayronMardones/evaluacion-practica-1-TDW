@@ -42,7 +42,7 @@ const DogCard = () => {
       <img
         src={dogImageUrl}
         alt="Perro candidato"
-        style={{ width: '600px', height: '600px' }} 
+        style={{ width: '500px', height: '500px' }} 
       />
       <h2>Nombre: {dogName}</h2>
       <button onClick={fetchRandomDog}>Aceptar</button>
