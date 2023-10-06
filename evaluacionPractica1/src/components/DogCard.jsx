@@ -8,6 +8,7 @@ const DogCard = () => {
   const [dogName, setDogName] = useState("");
   const [acceptedDogs, setAcceptedDogs] = useState([]);
   const [rejectedDogs, setRejectedDogs] = useState([]);
+  const [dogDescription, setDogDescription] = useState(""); 
 
   // Función para cargar una nueva imagen de perro al azar
   const fetchRandomDog = async (accept) => {
@@ -19,6 +20,9 @@ const DogCard = () => {
 
       // Genera un nuevo nombre de perro
       generateRandomName();
+
+      // Genera una nueva descripcion de perro
+      generateRandomDescription();
 
       // Actualiza la imagen del perro
       setDogImageUrl(imageUrl);
@@ -50,9 +54,9 @@ const DogCard = () => {
   //generar descripcion aleatoria a cada perro
 
   const generateRandomDescription = () => {
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ      ';
     let randomDescription = '';
-    for (let i = 0; i < 20; i++) {
+    for (let i = 10; i < 50; i++) {
       const randomIndex = Math.floor(Math.random() * alphabet.length);
       randomDescription += alphabet[randomIndex];
     }
@@ -73,6 +77,7 @@ const DogCard = () => {
           style={{ width: "400px", height: "400px" }}
         />
         <h2>Nombre: {dogName}</h2>
+        <h4>Descripcion: {dogDescription}</h4>
         <div className="button-container">
           <button
             className="accept-button"
