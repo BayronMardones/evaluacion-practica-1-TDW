@@ -25,6 +25,7 @@ const DogCard = () => {
 
   // Función para cargar una nueva imagen de perro al azar
   const fetchRandomDog = async (accept) => {
+    console.log("hola")
     try {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const data = await response.json();
