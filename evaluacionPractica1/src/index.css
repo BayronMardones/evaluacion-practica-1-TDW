@@ -67,3 +67,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Estilos para el contenedor de botones */
+.button-container {
+  display: flex; /* Muestra los botones en línea */
+  gap: 20px;/* Espacio entre los botones */
+}
+
+/* Estilos para el botón "Aceptar" (verde) */
+.accept-button {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estilos para el botón "Rechazar" (rojo) */
+.reject-button {
+  background-color: #FF5733; /* Rojo */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.dog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 1em #000000aa;
+  transition: transform 0.25s;
+}
+
+.accepted-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
+
+.rejected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: center;
+}
