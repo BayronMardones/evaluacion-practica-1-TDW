@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import {
   Grid,
-  Box,
   List,
   ListItem,
-  Divider,
   ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Typography,
+  Avatar
 } from "@material-ui/core";
 
 const DogCard = () => {
