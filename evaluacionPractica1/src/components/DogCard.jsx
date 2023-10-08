@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Avatar
-} from "@material-ui/core";
+import { Grid, List, ListItem, ListItemText, Avatar } from "@material-ui/core";
 
 const DogCard = () => {
   // Estado para la URL de la imagen y nombre del perro
@@ -26,7 +20,7 @@ const DogCard = () => {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const data = await response.json();
       const imageUrl = data.message;
-const newDog = { name: dogName, imageUrl: dogImageUrl};
+      const newDog = { name: dogName, imageUrl: dogImageUrl };
       // Genera un nuevo nombre de perro
       generateRandomName();
 
@@ -37,7 +31,6 @@ const newDog = { name: dogName, imageUrl: dogImageUrl};
 
       // Si se acepta el perro, agrega el nombre a la lista de perros aceptados
       if (accept) {
-        
         setAcceptedDogs([...acceptedDogs, newDog]);
       } else if (accept == false) {
         setRejectedDogs([...rejectedDogs, newDog]);
