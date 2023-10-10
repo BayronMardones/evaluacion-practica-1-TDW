@@ -6,7 +6,7 @@ import {
   ListItemText,
   Avatar,
   CircularProgress,
-  Box
+  Box,
 } from "@material-ui/core";
 
 const DogCard = () => {
@@ -88,43 +88,42 @@ const DogCard = () => {
     <Grid container spacing={10}>
       <Grid item xs>
         <Box className="dog-card">
-        {isLoading ? (
-          <Box>
-            <CircularProgress
-              color="inherit"
-              style={{ width: "400px", height: "360px" }}
+          {isLoading ? (
+            <Box>
+              <CircularProgress
+                color="inherit"
+                style={{ width: "400px", height: "360px" }}
+              />
+              Cargando...
+            </Box>
+          ) : (
+            <img
+              src={dogImageUrl}
+              alt="Perro candidato"
+              style={{ width: "400px", height: "400px" }}
             />
-            Cargando...
-          </Box>
-        ) : (
-          <img
-            src={dogImageUrl}
-            alt="Perro candidato"
-            style={{ width: "400px", height: "400px" }}
-          />
-        )}
-        <h2>Nombre: {dogName}</h2>
-        <h4>Descripcion: {dogDescription}</h4>
-        <div className="button-container">
-          <button
-            className="accept-button"
-            onClick={() => fetchRandomDog(true)}
-            disabled={isLoading}
-          >
-            Aceptar
-          </button>
-          <button
-            className="reject-button"
-            onClick={() => fetchRandomDog(false)}
-            disabled={isLoading}
-          >
-            Rechazar
-          </button>
-        </div>
+          )}
+          <h2>Nombre: {dogName}</h2>
+          <h4>Descripcion: {dogDescription}</h4>
+          <div className="button-container">
+            <button
+              className="accept-button"
+              onClick={() => fetchRandomDog(true)}
+              disabled={isLoading}
+            >
+              Aceptar
+            </button>
+            <button
+              className="reject-button"
+              onClick={() => fetchRandomDog(false)}
+              disabled={isLoading}
+            >
+              Rechazar
+            </button>
+          </div>
         </Box>
       </Grid>
 
-      
       <Grid item xs>
         <div>
           <h3>Perros Aceptados</h3>
@@ -168,8 +167,6 @@ const DogCard = () => {
           </List>
         </div>
       </Grid>
-
-
     </Grid>
   );
 };

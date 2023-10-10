@@ -110,7 +110,7 @@ button:focus-visible {
   gap: 1em;
   justify-content: center;
   overflow-y: scroll;
-  max-height: 600px;
+  max-height: 550px;
 }
 
 .rejected-list {
@@ -119,6 +119,6 @@ button:focus-visible {
   gap: 1em;
   justify-content: center;
   overflow-y: scroll;
-  max-height: 600px;
+  max-height: 550px;
 
 }
