@@ -6,7 +6,7 @@ import {
   ListItemText,
   Avatar,
   CircularProgress,
-  Box,
+  Box
 } from "@material-ui/core";
 
 const DogCard = () => {
@@ -86,12 +86,13 @@ const DogCard = () => {
 
   return (
     <Grid container spacing={10}>
-      <Grid item xs className="dog-card">
+      <Grid item xs>
+        <Box className="dog-card">
         {isLoading ? (
           <Box>
             <CircularProgress
               color="inherit"
-              style={{ width: "400px", height: "400px" }}
+              style={{ width: "400px", height: "360px" }}
             />
             Cargando...
           </Box>
@@ -120,12 +121,14 @@ const DogCard = () => {
             Rechazar
           </button>
         </div>
+        </Box>
       </Grid>
 
-      <Grid item xs className="accepted-list">
+      
+      <Grid item xs>
         <div>
           <h3>Perros Aceptados</h3>
-          <List sx={{ width: "100%" }}>
+          <List sx={{ width: "100%" }} className="accepted-list">
             {acceptedDogs.map((newDog, index) => (
               <ListItem key={index}>
                 <Avatar
@@ -144,10 +147,10 @@ const DogCard = () => {
         </div>
       </Grid>
 
-      <Grid item xs className="rejected-list">
+      <Grid item xs>
         <div>
           <h3>Perros Rechazados</h3>
-          <List sx={{ width: "100%" }}>
+          <List sx={{ width: "100%" }} className="rejected-list">
             {rejectedDogs.map((newDog, index) => (
               <ListItem key={index}>
                 <Avatar
@@ -165,6 +168,8 @@ const DogCard = () => {
           </List>
         </div>
       </Grid>
+
+
     </Grid>
   );
 };
