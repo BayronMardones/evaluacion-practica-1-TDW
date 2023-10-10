@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Grid, List, ListItem, ListItemText, Avatar } from "@material-ui/core";
+import {
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  Avatar,
+  CircularProgress,
+  Box,
+} from "@material-ui/core";
 
 const DogCard = () => {
   // Estado para la URL de la imagen y nombre del perro
@@ -13,13 +21,18 @@ const DogCard = () => {
 
   const [dogDescription, setDogDescription] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // Función para cargar una nueva imagen de perro al azar
   const fetchRandomDog = async (accept) => {
+    // Deshabilitar los botones durante la carga
+    setIsLoading(true);
     try {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const data = await response.json();
       const imageUrl = data.message;
       const newDog = { name: dogName, imageUrl: dogImageUrl };
+
       // Genera un nuevo nombre de perro
       generateRandomName();
 
@@ -37,6 +50,9 @@ const DogCard = () => {
       }
     } catch (error) {
       console.error("Error al cargar la imagen del perro:", error);
+    } finally {
+      // Habilitar los botones después de que se complete la carga
+      setIsLoading(false);
     }
   };
 
@@ -71,23 +87,35 @@ const DogCard = () => {
   return (
     <Grid container spacing={10}>
       <Grid item xs className="dog-card">
-        <img
-          src={dogImageUrl}
-          alt="Perro candidato"
-          style={{ width: "400px", height: "400px" }}
-        />
+        {isLoading ? (
+          <Box>
+            <CircularProgress
+              color="inherit"
+              style={{ width: "400px", height: "400px" }}
+            />
+            Cargando...
+          </Box>
+        ) : (
+          <img
+            src={dogImageUrl}
+            alt="Perro candidato"
+            style={{ width: "400px", height: "400px" }}
+          />
+        )}
         <h2>Nombre: {dogName}</h2>
         <h4>Descripcion: {dogDescription}</h4>
         <div className="button-container">
           <button
             className="accept-button"
             onClick={() => fetchRandomDog(true)}
+            disabled={isLoading}
           >
             Aceptar
           </button>
           <button
             className="reject-button"
             onClick={() => fetchRandomDog(false)}
+            disabled={isLoading}
           >
             Rechazar
           </button>
