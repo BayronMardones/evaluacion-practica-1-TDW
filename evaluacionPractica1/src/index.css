@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #e1a26a;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -68,57 +68,86 @@ button:focus-visible {
   }
 }
 
-/* Estilos para el contenedor de botones */
+
 .button-container {
-  display: flex; /* Muestra los botones en línea */
-  gap: 20px;/* Espacio entre los botones */
+  display: flex; 
+  gap: 20px;
 }
 
-/* Estilos para el botón "Aceptar" (verde) */
 .accept-button {
-  background-color: #4CAF50; /* Verde */
+  background-color: #a5b462; 
   color: white;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
 }
 
-/* Estilos para el botón "Rechazar" (rojo) */
 .reject-button {
-  background-color: #FF5733; /* Rojo */
+  background-color: #404040; 
   color: white;
   padding: 10px 20px;
   border: none;
   cursor: pointer;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
 }
 
 .dog-card {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   padding: 1em;
-  border-radius: 8px;
-  background-color: #1a1a1a;
+  border-radius: 25px;
+  background-color: #97533d;
   box-shadow: 0 0 1em #000000aa;
-  transition: transform 0.25s;
-  max-height: 600px;
+  transition: 0.25s;
+  height: 650px;
+
 }
 
-.accepted-list {
+.list-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1em;
   justify-content: center;
-  overflow-y: scroll;
-  max-height: 550px;
+  max-height: 682px;
+  height: 682px;
+  background-color: #97533d;
+  border-radius: 25px;
+
+  box-shadow: 0 0 1em #000000aa;
+  overflow: hidden; /* Evita que el contenedor completo sea scrollable */
+  /*si tiene menos de 200px de ancho*/
 }
 
-.rejected-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1em;
-  justify-content: center;
-  overflow-y: scroll;
-  max-height: 550px;
-
+.list {
+  flex: 1; /* Este elemento se expandirá para ocupar el espacio disponible */
+  overflow-y: scroll; /* Solo el contenido de .list será scrollable */
 }
+
+.list-name {
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  border-radius: 25px;
+  background-color: #97533d;
+}
+
+
+.dog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
