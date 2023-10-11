@@ -85,12 +85,13 @@ const DogCard = () => {
   }, []); // El array vacío asegura que esto se ejecute solo una vez al cargar el componente
 
   return (
-    <Grid container spacing={10}>
+    <Grid container spacing={3}>
       <Grid item xs>
         <Box className="dog-card">
           {isLoading ? (
             <Box>
               <CircularProgress
+                className="dog-image"
                 color="inherit"
                 style={{ width: "400px", height: "360px" }}
               />
@@ -98,6 +99,7 @@ const DogCard = () => {
             </Box>
           ) : (
             <img
+              className="dog-image"
               src={dogImageUrl}
               alt="Perro candidato"
               style={{ width: "400px", height: "400px" }}
@@ -123,39 +125,39 @@ const DogCard = () => {
           </div>
         </Box>
       </Grid>
+      <Grid item xs className="list-con">
 
-      <Grid item xs>
-        <div>
-          <h3>Perros Aceptados</h3>
-          <List sx={{ width: "100%" }} className="accepted-list">
-            {acceptedDogs.map((newDog, index) => (
-              <ListItem key={index}>
-                <Avatar
-                  src={newDog.imageUrl}
-                  alt="Perro Aceptado"
-                  style={{ width: "50px", height: "50px" }}
-                />
-                <ListItemText
-                  primary={
-                    <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </div>
+          <div className="list-container">
+            <h3 className="list-name">Perros Aceptados</h3>
+            <List sx className="list">
+              {acceptedDogs.map((newDog, index) => (
+                <ListItem key={index}>
+                  <Avatar
+                    src={newDog.imageUrl}
+                    alt="Perro Aceptado"
+                    style={{ width: "40px", height: "40px" }}
+                  />
+                  <ListItemText
+                    primary={
+                      <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
+                    }
+                  />
+                </ListItem>
+              ))}
+            </List>
+          </div>
       </Grid>
 
       <Grid item xs>
-        <div>
-          <h3>Perros Rechazados</h3>
-          <List sx={{ width: "100%" }} className="rejected-list">
+        <div className="list-container">
+          <h3 className="list-name">Perros Rechazados</h3>
+          <List xs className="list">
             {rejectedDogs.map((newDog, index) => (
               <ListItem key={index}>
                 <Avatar
                   src={newDog.imageUrl}
                   alt="Perro Aceptado"
-                  style={{ width: "50px", height: "50px" }}
+                  style={{ width: "40px", height: "40px" }}
                 />
                 <ListItemText
                   primary={
