@@ -23,6 +23,9 @@ const DogCard = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  //variable para ocultar descripcion del perro 
+  const [showDescription, setShowDescription] = useState({});
+
   // Función para cargar una nueva imagen de perro al azar
   const fetchRandomDog = async (accept) => {
     // Deshabilitar los botones durante la carga
@@ -31,7 +34,7 @@ const DogCard = () => {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const data = await response.json();
       const imageUrl = data.message;
-      const newDog = { name: dogName, imageUrl: dogImageUrl };
+      const newDog = { name: dogName, imageUrl: dogImageUrl, description : dogDescription };
 
       // Genera un nuevo nombre de perro
       generateRandomName();
@@ -46,7 +49,6 @@ const DogCard = () => {
         setAcceptedDogs([...acceptedDogs, newDog]);
       } else if (accept == false) {
         setRejectedDogs([...rejectedDogs, newDog]);
-        console.log(dogInfo);
       }
     } catch (error) {
       console.error("Error al cargar la imagen del perro:", error);
@@ -77,6 +79,15 @@ const DogCard = () => {
       randomDescription += alphabet[randomIndex];
     }
     setDogDescription(randomDescription);
+  };
+
+  // Función para mostrar u ocultar la descripción del perro
+  const toggleDescription = (index) => {
+    //setShowDescription(!showDescription);
+    setShowDescription((prevState) => ({
+      ...prevState,
+      [index]: !prevState[index],
+    }));
   };
 
   // Efecto para cargar una imagen y generar un nombre al cargar el componente
@@ -141,7 +152,24 @@ const DogCard = () => {
                     primary={
                       <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
                     }
+
+                    //boton para mostrar descripcion
+                    secondary={
+                      showDescription[index] ? (
+                        <div>
+                          <p>{newDog.description}</p>
+                          <button onClick={() => toggleDescription(index)}>
+                            Ocultar Descripción
+                          </button>
+                        </div>
+                      ) : (
+                        <button onClick={() => toggleDescription(index)}>
+                          Mostrar Descripción
+                        </button>
+                      )
+                    }
                   />
+                  
                 </ListItem>
               ))}
             </List>
@@ -164,7 +192,12 @@ const DogCard = () => {
                     <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
                   }
                 />
+                <ListItemText
+                  secondary={newDog.description} // Aquí se agrega la descripción
+                />
               </ListItem>
+
+              
             ))}
           </List>
         </div>
