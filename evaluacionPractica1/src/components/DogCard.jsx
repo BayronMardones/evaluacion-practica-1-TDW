@@ -23,7 +23,7 @@ const DogCard = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  //variable para ocultar descripcion del perro 
+  //variable para ocultar descripcion del perro
   const [showDescription, setShowDescription] = useState({});
 
   //variables para diferenciar entre perros aceptados y rechazados
@@ -38,7 +38,11 @@ const DogCard = () => {
       const response = await fetch("https://dog.ceo/api/breeds/image/random");
       const data = await response.json();
       const imageUrl = data.message;
-      const newDog = { name: dogName, imageUrl: dogImageUrl, description : dogDescription };
+      const newDog = {
+        name: dogName,
+        imageUrl: dogImageUrl,
+        description: dogDescription,
+      };
 
       // Genera un nuevo nombre de perro
       generateRandomName();
@@ -96,10 +100,10 @@ const DogCard = () => {
         });
         // Establecer la descripción actual en true si está oculta o en false si está visible
         newDescriptionState[index] = !prevState[index];
-        
+
         return newDescriptionState;
       });
-    
+
       // Cerrar todas las descripciones en la lista de perros rechazados
       setShowDescriptionRejected((prevState) => {
         const newDescriptionState = { ...prevState };
@@ -109,7 +113,6 @@ const DogCard = () => {
         return newDescriptionState;
       });
     } else {
-
       setShowDescriptionRejected((prevState) => {
         const newDescriptionState = { ...prevState };
         Object.keys(newDescriptionState).forEach((key) => {
@@ -119,7 +122,7 @@ const DogCard = () => {
         newDescriptionState[index] = !prevState[index];
         return newDescriptionState;
       });
-      
+
       // Cerrar todas las descripciones en la lista de perros aceptados
       setShowDescriptionAccepted((prevState) => {
         const newDescriptionState = { ...prevState };
@@ -129,6 +132,23 @@ const DogCard = () => {
         return newDescriptionState;
       });
     }
+  };
+  //funcion para cambiar de lista, recibe el index del perro, reordenar la lista de perros aceptados y rechazados
+  const changeList = (index, isAccepted) => {
+    const newAcceptedDogs = [...acceptedDogs];
+    const newRejectedDogs = [...rejectedDogs];
+    if (isAccepted) {
+      //agregar perro a la lista contraria
+      newAcceptedDogs.push(newRejectedDogs[index]);
+      //eliminar perro de la lista actual
+      newRejectedDogs.splice(index, 1);
+    } else {
+      newRejectedDogs.push(newAcceptedDogs[index]);
+      newAcceptedDogs.splice(index, 1);
+    } 
+    //actualizar listas
+    setRejectedDogs(newRejectedDogs);
+    setAcceptedDogs(newAcceptedDogs);
   };
 
   // Efecto para cargar una imagen y generar un nombre al cargar el componente
@@ -178,43 +198,41 @@ const DogCard = () => {
         </Box>
       </Grid>
       <Grid item xs className="list-con">
-
-          <div className="list-container">
-            <h3 className="list-name">Perros Aceptados</h3>
-            <List sx className="list">
-              {acceptedDogs.map((newDog, index) => (
-                <ListItem key={index}>
-                  <Avatar
-                    src={newDog.imageUrl}
-                    alt="Perro Aceptado"
-                    style={{ width: "40px", height: "40px" }}
-                  />
-                  <ListItemText
-                    primary={
-                      <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
-                    }
-
-                    //boton para mostrar descripcion
-                    secondary={
-                      showDescriptionAccepted[index] ? (
-                        <div>
-                          <p>{newDog.description}</p>
-                          <button onClick={() => toggleDescription(index, true)}>
-                            Ocultar Descripción
-                          </button>
-                        </div>
-                      ) : (
+        <div className="list-container">
+          <h3 className="list-name">Perros Aceptados</h3>
+          <List sx className="list">
+            {acceptedDogs.map((newDog, index) => (
+              <ListItem key={index}>
+                <Avatar
+                  src={newDog.imageUrl}
+                  alt="Perro Aceptado"
+                  style={{ width: "40px", height: "40px" }}
+                />
+                <ListItemText
+                  primary={
+                    <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
+                  }
+                  //boton para mostrar descripcion
+                  secondary={
+                    showDescriptionAccepted[index] ? (
+                      <div>
+                        <p>{newDog.description}</p>
                         <button onClick={() => toggleDescription(index, true)}>
-                          Mostrar Descripción
+                          Ocultar Descripción
                         </button>
-                      )
-                    }
-                  />
-                  
-                </ListItem>
-              ))}
-            </List>
-          </div>
+                      </div>
+                    ) : (
+                      <button onClick={() => toggleDescription(index, true)}>
+                        Mostrar Descripción
+                      </button>
+                    )
+                  }
+                />
+                <button onClick={() => changeList(index, false)}>{"<->"}</button>
+              </ListItem>
+            ))}
+          </List>
+        </div>
       </Grid>
 
       <Grid item xs>
@@ -232,8 +250,7 @@ const DogCard = () => {
                   primary={
                     <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
                   }
-
-                   //boton para mostrar descripcion
+                  //boton para mostrar descripcion
                   secondary={
                     showDescriptionRejected[index] ? (
                       <div>
@@ -249,6 +266,7 @@ const DogCard = () => {
                     )
                   }
                 />
+                <button onClick={() => changeList(index, true)}>{"<->"}</button>
               </ListItem>
             ))}
           </List>
