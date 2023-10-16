@@ -87,7 +87,7 @@ const DogCard = () => {
 
   // Función para mostrar u ocultar la descripción del perro
   const toggleDescription = (index, isAccepted) => {
-    if (isAccepted || isAccepted == false) {
+    if (isAccepted) {
       setShowDescriptionAccepted((prevState) => {
         const newDescriptionState = { ...prevState };
         
