@@ -26,6 +26,10 @@ const DogCard = () => {
   //variable para ocultar descripcion del perro 
   const [showDescription, setShowDescription] = useState({});
 
+  //variables para diferenciar entre perros aceptados y rechazados
+  const [showDescriptionAccepted, setShowDescriptionAccepted] = useState({});
+  const [showDescriptionRejected, setShowDescriptionRejected] = useState({});
+
   // Función para cargar una nueva imagen de perro al azar
   const fetchRandomDog = async (accept) => {
     // Deshabilitar los botones durante la carga
@@ -82,12 +86,48 @@ const DogCard = () => {
   };
 
   // Función para mostrar u ocultar la descripción del perro
-  const toggleDescription = (index) => {
-    //setShowDescription(!showDescription);
-    setShowDescription((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
+  const toggleDescription = (index, isAccepted) => {
+    if (isAccepted || isAccepted == false) {
+      setShowDescriptionAccepted((prevState) => {
+        const newDescriptionState = { ...prevState };
+        
+        // Establecer todas las descripciones en false
+        Object.keys(newDescriptionState).forEach((key) => {
+          newDescriptionState[key] = false;
+        });
+  
+        // Establecer la descripción actual en true si está oculta o en false si está visible
+        newDescriptionState[index] = !prevState[index];
+        
+        return newDescriptionState;
+      });
+    
+      // Cerrar todas las descripciones en la lista de perros rechazados
+      setShowDescriptionRejected((prevState) => {
+        const newDescriptionState = { ...prevState };
+        Object.keys(newDescriptionState).forEach((key) => {
+          newDescriptionState[key] = false;
+        });
+        return newDescriptionState;
+      });
+    } else {
+      setShowDescriptionRejected((prevState) => {
+        const newDescriptionState = { ...prevState };
+        Object.keys(newDescriptionState).forEach((key) => {
+          newDescriptionState[key] = false;
+        });
+        return newDescriptionState;
+      });
+      
+      // Cerrar todas las descripciones en la lista de perros aceptados
+      setShowDescriptionAccepted((prevState) => {
+        const newDescriptionState = { ...prevState };
+        Object.keys(newDescriptionState).forEach((key) => {
+          newDescriptionState[key] = false;
+        });
+        return newDescriptionState;
+      });
+    }
   };
 
   // Efecto para cargar una imagen y generar un nombre al cargar el componente
@@ -155,15 +195,15 @@ const DogCard = () => {
 
                     //boton para mostrar descripcion
                     secondary={
-                      showDescription[index] ? (
+                      showDescriptionAccepted[index] ? (
                         <div>
                           <p>{newDog.description}</p>
-                          <button onClick={() => toggleDescription(index)}>
+                          <button onClick={() => toggleDescription(index, true)}>
                             Ocultar Descripción
                           </button>
                         </div>
                       ) : (
-                        <button onClick={() => toggleDescription(index)}>
+                        <button onClick={() => toggleDescription(index, true)}>
                           Mostrar Descripción
                         </button>
                       )
@@ -191,13 +231,24 @@ const DogCard = () => {
                   primary={
                     <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
                   }
-                />
-                <ListItemText
-                  secondary={newDog.description} // Aquí se agrega la descripción
+
+                   //boton para mostrar descripcion
+                   secondary={
+                    showDescriptionRejected[index] ? (
+                      <div>
+                        <p>{newDog.description}</p>
+                        <button onClick={() => toggleDescription(index, false)}>
+                          Ocultar Descripción
+                        </button>
+                      </div>
+                    ) : (
+                      <button onClick={() => toggleDescription(index, false)}>
+                        Mostrar Descripción
+                      </button>
+                    )
+                  }
                 />
               </ListItem>
-
-              
             ))}
           </List>
         </div>
