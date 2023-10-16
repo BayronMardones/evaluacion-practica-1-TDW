@@ -165,7 +165,7 @@ const DogCard = () => {
               <CircularProgress
                 className="dog-image"
                 color="inherit"
-                style={{ width: "400px", height: "360px" }}
+                style={{ width: "380px", height: "380px" }}
               />
               Cargando...
             </Box>
