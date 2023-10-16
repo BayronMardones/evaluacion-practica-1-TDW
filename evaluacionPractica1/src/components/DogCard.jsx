@@ -90,12 +90,10 @@ const DogCard = () => {
     if (isAccepted) {
       setShowDescriptionAccepted((prevState) => {
         const newDescriptionState = { ...prevState };
-        
         // Establecer todas las descripciones en false
         Object.keys(newDescriptionState).forEach((key) => {
           newDescriptionState[key] = false;
         });
-  
         // Establecer la descripción actual en true si está oculta o en false si está visible
         newDescriptionState[index] = !prevState[index];
         
@@ -111,11 +109,14 @@ const DogCard = () => {
         return newDescriptionState;
       });
     } else {
+
       setShowDescriptionRejected((prevState) => {
         const newDescriptionState = { ...prevState };
         Object.keys(newDescriptionState).forEach((key) => {
           newDescriptionState[key] = false;
         });
+
+        newDescriptionState[index] = !prevState[index];
         return newDescriptionState;
       });
       
@@ -233,7 +234,7 @@ const DogCard = () => {
                   }
 
                    //boton para mostrar descripcion
-                   secondary={
+                  secondary={
                     showDescriptionRejected[index] ? (
                       <div>
                         <p>{newDog.description}</p>
