@@ -145,10 +145,26 @@ const DogCard = () => {
     } else {
       newRejectedDogs.push(newAcceptedDogs[index]);
       newAcceptedDogs.splice(index, 1);
-    } 
+    }
     //actualizar listas
     setRejectedDogs(newRejectedDogs);
     setAcceptedDogs(newAcceptedDogs);
+  };
+
+  //eliminar perro de la lista de candidatos
+  const removeDog = (index, isAccepted) => {
+    // Copiar el arreglo acceptedDogs
+    const updatedAcceptedDogs = [...acceptedDogs];
+    const updatedRejectedDogs = [...rejectedDogs];
+
+    if(isAccepted){
+      updatedAcceptedDogs.splice(index, 1);
+    }else{
+      updatedRejectedDogs.splice(index, 1);
+    }
+    // Actualizar el estado de acceptedDogs con el nuevo arreglo
+    setAcceptedDogs(updatedAcceptedDogs);
+    setRejectedDogs(updatedRejectedDogs);
   };
 
   // Efecto para cargar una imagen y generar un nombre al cargar el componente
@@ -229,6 +245,10 @@ const DogCard = () => {
                   }
                 />
                 <button onClick={() => changeList(index, false)}>{"<->"}</button>
+                {/* boton para eliminar candidato */}
+                <button onClick={() => removeDog(index, true)}>
+                  eliminar candidato
+                </button>
               </ListItem>
             ))}
           </List>
@@ -267,6 +287,10 @@ const DogCard = () => {
                   }
                 />
                 <button onClick={() => changeList(index, true)}>{"<->"}</button>
+                {/* boton para eliminar candidato */}
+                <button onClick={() => removeDog(index, false)}>
+                  eliminar candidato
+                </button>
               </ListItem>
             ))}
           </List>
