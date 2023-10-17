@@ -329,7 +329,7 @@ const DogCard = () => {
                     {/* Botón para eliminar el candidato */}
                     <button 
                     className="delete-button"
-                    onClick={() => removeDog(index, true)}>
+                    onClick={() => removeDog(index, false)}>
                       {"X"}
                     </button>
                   </Grid>
