@@ -216,13 +216,14 @@ const DogCard = () => {
 
       <Grid item xs>
         <div className="list-container">
-          <h3 className="list-name">Perros Aceptados</h3>
+          <h3 className="list-name"
+          style={{ borderBottom: "4px solid #a5b462" }}>Perros Aceptados</h3>
 
           <List sx className="list">
             {acceptedDogs.map((newDog, index) => (
               <ListItem
                 key={index}
-                style={{ borderBottom: "1px solid #404040" }}
+                style={{ borderBottom: "1px solid #a5b462" }}
               >
                 <Grid
                   container
@@ -279,7 +280,9 @@ const DogCard = () => {
 
       <Grid item xs>
         <div className="list-container">
-          <h3 className="list-name">Perros Rechazados</h3>
+          <h3 className="list-name"
+          style={{ borderBottom: "4px solid #404040" }}
+          >Perros Rechazados</h3>
 
           <List sx className="list">
             {rejectedDogs.map((newDog, index) => (
