@@ -117,24 +117,26 @@ button:focus-visible {
   flex-direction: column;
   gap: 1em;
   justify-content: center;
-  max-height: 682px;
   height: 682px;
+  max-width: 400px;
+  min-width: 150px;
   background-color: #97533d;
   border-radius: 25px;
 
   box-shadow: 0 0 1em #000000aa;
-  overflow: hidden; /* Evita que el contenedor completo sea scrollable */
-  /*si tiene menos de 200px de ancho*/
+  overflow: hidden;
+
 }
 
 .list {
-  flex: 1; /* Este elemento se expandirá para ocupar el espacio disponible */
-  overflow-y: scroll; /* Solo el contenido de .list será scrollable */
+  flex: 1; 
+  overflow-y: scroll; 
+  min-width: 150px;
 }
 
 .list-name {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: bold;
   margin: 0;
   padding: 0;
@@ -151,3 +153,26 @@ button:focus-visible {
   border-radius: 25px;
 }
 
+.list-button {
+  background-color: #404040; 
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.delete-button {
+  background-color: #700000; 
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1em;
+  font-weight: bold;
+  margin: 0;
+}

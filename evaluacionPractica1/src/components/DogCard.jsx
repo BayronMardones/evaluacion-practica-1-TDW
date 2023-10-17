@@ -157,9 +157,9 @@ const DogCard = () => {
     const updatedAcceptedDogs = [...acceptedDogs];
     const updatedRejectedDogs = [...rejectedDogs];
 
-    if(isAccepted){
+    if (isAccepted) {
       updatedAcceptedDogs.splice(index, 1);
-    }else{
+    } else {
       updatedRejectedDogs.splice(index, 1);
     }
     // Actualizar el estado de acceptedDogs con el nuevo arreglo
@@ -213,42 +213,64 @@ const DogCard = () => {
           </div>
         </Box>
       </Grid>
-      <Grid item xs className="list-con">
+
+      <Grid item xs>
         <div className="list-container">
           <h3 className="list-name">Perros Aceptados</h3>
+
           <List sx className="list">
             {acceptedDogs.map((newDog, index) => (
-              <ListItem key={index}>
-                <Avatar
-                  src={newDog.imageUrl}
-                  alt="Perro Aceptado"
-                  style={{ width: "40px", height: "40px" }}
-                />
-                <ListItemText
-                  primary={
-                    <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
-                  }
-                  //boton para mostrar descripcion
-                  secondary={
-                    showDescriptionAccepted[index] ? (
-                      <div>
+              <ListItem
+                key={index}
+                style={{ borderBottom: "1px solid #404040" }}
+              >
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Avatar
+                      src={newDog.imageUrl}
+                      alt="Perro Aceptado"
+                      style={{ width: "40px", height: "40px" }}
+                    />
+                  </Grid>
+                  <Grid item style={{ textAlign: "left" }}>
+                    <div>
+                      <span>{newDog.name}</span>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <div style={{ textAlign: "center" }}>
+                      {showDescriptionAccepted[index] && (
                         <p>{newDog.description}</p>
-                        <button onClick={() => toggleDescription(index, true)}>
-                          Ocultar Descripción
-                        </button>
-                      </div>
-                    ) : (
-                      <button onClick={() => toggleDescription(index, true)}>
-                        Mostrar Descripción
-                      </button>
-                    )
-                  }
-                />
-                <button onClick={() => changeList(index, false)}>{"<->"}</button>
-                {/* boton para eliminar candidato */}
-                <button onClick={() => removeDog(index, true)}>
-                  eliminar candidato
-                </button>
+                      )}
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <button 
+                    className="list-button"
+                    onClick={() => toggleDescription(index, true)}>
+                      {showDescriptionAccepted[index] ? " ʌ " : " v "}
+                    </button>
+                  </Grid>
+                  <Grid item>
+                    <button 
+                    className="list-button"
+                    onClick={() => changeList(index, false)}>
+                      {"⇌"}
+                    </button>
+                  </Grid>
+                  <Grid item>
+                    {/* Botón para eliminar el candidato */}
+                    <button 
+                    className="delete-button"
+                    onClick={() => removeDog(index, true)}>
+                      {"X"}
+                    </button>
+                  </Grid>
+                </Grid>
               </ListItem>
             ))}
           </List>
@@ -258,44 +280,66 @@ const DogCard = () => {
       <Grid item xs>
         <div className="list-container">
           <h3 className="list-name">Perros Rechazados</h3>
-          <List xs className="list">
+
+          <List sx className="list">
             {rejectedDogs.map((newDog, index) => (
-              <ListItem key={index}>
-                <Avatar
-                  src={newDog.imageUrl}
-                  alt="Perro Aceptado"
-                  style={{ width: "40px", height: "40px" }}
-                />
-                <ListItemText
-                  primary={
-                    <span style={{ marginLeft: "15px" }}>{newDog.name}</span>
-                  }
-                  //boton para mostrar descripcion
-                  secondary={
-                    showDescriptionRejected[index] ? (
-                      <div>
+              <ListItem
+                key={index}
+                style={{ borderBottom: "1px solid #404040" }}
+              >
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
+                  <Grid item>
+                    <Avatar
+                      src={newDog.imageUrl}
+                      alt="Perro Rechazado"
+                      style={{ width: "40px", height: "40px" }}
+                    />
+                  </Grid>
+                  <Grid item style={{ textAlign: "left" }}>
+                    <div>
+                      <span>{newDog.name}</span>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <div style={{ textAlign: "center" }}>
+                      {showDescriptionRejected[index] && (
                         <p>{newDog.description}</p>
-                        <button onClick={() => toggleDescription(index, false)}>
-                          Ocultar Descripción
-                        </button>
-                      </div>
-                    ) : (
-                      <button onClick={() => toggleDescription(index, false)}>
-                        Mostrar Descripción
-                      </button>
-                    )
-                  }
-                />
-                <button onClick={() => changeList(index, true)}>{"<->"}</button>
-                {/* boton para eliminar candidato */}
-                <button onClick={() => removeDog(index, false)}>
-                  eliminar candidato
-                </button>
+                      )}
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <button 
+                    className="list-button"
+                    onClick={() => toggleDescription(index, false)}>
+                      {showDescriptionRejected[index] ? " ʌ " : " v "}
+                    </button>
+                  </Grid>
+                  <Grid item>
+                    <button 
+                    className="list-button"
+                    onClick={() => changeList(index, true)}>
+                      {"⇌"}
+                    </button>
+                  </Grid>
+                  <Grid item>
+                    {/* Botón para eliminar el candidato */}
+                    <button 
+                    className="delete-button"
+                    onClick={() => removeDog(index, false)}>
+                      {"X"}
+                    </button>
+                  </Grid>
+                </Grid>
               </ListItem>
             ))}
           </List>
         </div>
       </Grid>
+
     </Grid>
   );
 };
