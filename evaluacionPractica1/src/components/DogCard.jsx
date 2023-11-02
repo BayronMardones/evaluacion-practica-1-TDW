@@ -137,12 +137,19 @@ const DogCard = () => {
   const changeList = (index, isAccepted) => {
     const newAcceptedDogs = [...acceptedDogs];
     const newRejectedDogs = [...rejectedDogs];
+    const newDescriptionState = { ...showDescription};
     if (isAccepted) {
+      Object.keys(newDescriptionState).forEach((key) => {
+        newDescriptionState[key] = false;
+      });
       //agregar perro a la lista contraria
       newAcceptedDogs.push(newRejectedDogs[index]);
       //eliminar perro de la lista actual
       newRejectedDogs.splice(index, 1);
     } else {
+      Object.keys(newDescriptionState).forEach((key) => {
+        newDescriptionState[key] = false;
+      });
       newRejectedDogs.push(newAcceptedDogs[index]);
       newAcceptedDogs.splice(index, 1);
     }
